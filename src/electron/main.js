@@ -4,16 +4,27 @@ const app = electron.app
 // Module to create native browser window.
 const BrowserWindow = electron.BrowserWindow;
 
+var express = require('express');
+var bodyParser = require('body-parser');
 const path = require('path');
 const url = require('url');
 
-const child_process = require('child_process');
+var expressApp = express();
+expressApp.use(bodyParser.json());
+expressApp.use(bodyParser.urlencoded({ extended: false }));
 
-// exec: spawns a shell.
-child_process.exec('npm -v', function(error, stdout, stderr){
-    console.log(stdout);
+// to serve our JavaScript, CSS and index.html
+expressApp.use(express.static('./'));
+
+expressApp.get('/devices', function (req, res) {
+    const child_process = require('child_process');
+    child_process.exec('npm -v', function(error, stdout, stderr){
+        res.send(stdout);
+    });
 });
 
+var port = process.env.PORT || 5000
+expressApp.listen(port, () => console.log('Listening at http://localhost:5000'))
 
 
 // Keep a global reference of the window object, if you don't, the window will
