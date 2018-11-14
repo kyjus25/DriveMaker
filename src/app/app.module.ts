@@ -16,6 +16,7 @@ import {appRoutes} from './routes';
 import {RouterModule} from '@angular/router';
 import {CreateComponent} from './create/create.component';
 import {LandingComponent} from './landing/landing.component';
+import {HttpClientModule} from '@angular/common/http';
 
 @NgModule({
   declarations: [
@@ -31,7 +32,7 @@ import {LandingComponent} from './landing/landing.component';
     BrowserModule,
     CardModule,
     FormsModule,
-    HttpModule,
+    HttpClientModule,
     BrowserAnimationsModule,
   ],
   providers: [

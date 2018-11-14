@@ -6,7 +6,7 @@ import {BehaviorSubject} from 'rxjs/BehaviorSubject';
 import {ReplaySubject} from 'rxjs/ReplaySubject';
 import {ActivatedRoute, Router} from '@angular/router';
 import {Process} from 'process';
-declare var require: any;
+import {HttpClient} from '@angular/common/http';
 
 @Component({
   selector: 'app-canvas',
@@ -18,13 +18,15 @@ export class CreateComponent implements OnInit, OnDestroy {
   public sessionId = null;
   private script = null;
   private devices = [];
-  private process: Process;
 
   constructor(
     private route: ActivatedRoute,
-    private router: Router
+    private router: Router,
+    private http: HttpClient
   ) {
-    console.log(this.process.env.DEVICES);
+    this.http.get('http:/localhost:5000/devices').subscribe(res => {
+      console.log(res);
+    })
   }
 
   ngOnInit() {

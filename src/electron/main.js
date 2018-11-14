@@ -18,8 +18,44 @@ expressApp.use(express.static('./'));
 
 expressApp.get('/devices', function (req, res) {
     const child_process = require('child_process');
-    child_process.exec('npm -v', function(error, stdout, stderr){
-        res.send(stdout);
+
+    child_process.exec('df -Hl | awk \'{print $1}\'', function(error_ids, stdout_ids, stderr_ids){
+        let ids = stdout_ids;
+        child_process.exec('df -Hl | awk \'{print $2}\'', function(error_size, stdout_size, stderr_size){
+            let size = stdout_size;
+            child_process.exec('df -Hl | awk \'{print $9}\'', function(error_mount1, stdout_mount1, stderr_mount1){
+                let mount1 = stdout_mount1;
+                child_process.exec('df -Hl | awk \'{print $10}\'', function(error_mount2, stdout_mount2, stderr_mount2){
+                    let mount2 = stdout_mount2;
+
+                    // Split the variables into arrays
+                    ids = ids.split("\n");
+                    size = size.split("\n");
+                    mount1 = mount1.split("\n");
+                    mount2 = mount2.split("\n");
+
+                    // Remove the headings from the arrays
+                    ids = ids.slice(1);
+                    size = size.slice(1);
+                    mount1 = mount1.slice(1);
+                    mount2 = mount2.slice(1);
+
+                    let send = [];
+                    for (i = 0; i < ids.length - 1; i++) {
+                        let device = {};
+                        device.id = ids[i];
+                        device.size = size[i];
+                        if (mount2[i] !== '') {
+                            device.mount = mount1[i] + ' ' + mount2[i];
+                        } else {
+                            device.mount = mount1[i];
+                        }
+                        send.push(device);
+                    }
+                    res.send(send);
+                });
+            });
+        });
     });
 });
 
