@@ -1,4 +1,4 @@
-import {Component, OnDestroy, OnInit} from '@angular/core';
+import {AfterViewInit, Component, OnDestroy, OnInit} from '@angular/core';
 import {MenuItem} from 'primeng/api';
 import {Observable} from 'rxjs/Observable';
 import {Subject} from 'rxjs/Subject';
@@ -13,9 +13,10 @@ import {HttpClient} from '@angular/common/http';
   templateUrl: './create.component.html',
   styleUrls: ['./create.component.css']
 })
-export class CreateComponent implements OnInit, OnDestroy {
+export class CreateComponent implements OnInit, OnDestroy, AfterViewInit {
 
   public sessionId = null;
+  public fadeContainer: Element = null;    // Local reference to div for fading-in and out on state transitions.
   private script = null;
   private devices = [];
 
@@ -30,6 +31,12 @@ export class CreateComponent implements OnInit, OnDestroy {
   }
 
   ngOnInit() {
+    this.fadeContainer = document.getElementById('fade-container');
+  }
+
+  public ngAfterViewInit() {
+    // Fade our package selection information in.
+    this.fadeContainer.className = 'visible';
   }
 
   ngOnDestroy() {

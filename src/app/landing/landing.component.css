@@ -1,5 +1,5 @@
 #background {
-  background: #1193d4;
+  background: forestgreen;
   height: 100vh;
   display: flex;
   align-items: center;
@@ -25,17 +25,12 @@ h1 b {
 }
 
 #logo {
-  font-size: 100px;
-  color: white;
-  padding: 100px;
-  background: url(assets/svgs/atom-white.svg);
-  background-size: 200%;
-  background-position: 42% 12%;
-  position: relative;
-  top: -50px;
+  font-size: 600px;
+  color: rgba(255,255,255,0.1);
+  position: absolute;
 }
 #landing {
-  width: 60vw;
+  width: 70vw;
   position: relative;
   top: -50px;
   z-index: 2;

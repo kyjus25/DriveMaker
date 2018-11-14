@@ -22,7 +22,10 @@
 </head>
 <body>
   <button id="close" onclick="closeWindow()"><i class="fa fa-times"></i></button>
-  <app-root>Loading...</app-root>
+  <div id="fractal">
+    <app-root>Loading...</app-root>
+  </div>
+
 </body>
 
 <script>
@@ -38,7 +41,7 @@
 
 <script>
   /* particlesJS.load(@dom-id, @path-json, @callback (optional)); */
-  particlesJS.load('background', 'assets/json/particles.json', function() {});
+  particlesJS.load('fractal', 'assets/json/particles.json', function() {});
 </script>
 
 </html>

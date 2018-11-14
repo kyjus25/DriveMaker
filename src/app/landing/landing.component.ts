@@ -15,12 +15,25 @@ export class LandingComponent implements OnInit {
 
   public display = false;
   public sessionID = null;
+  public fadeContainer: Element = null;    // Local reference to div for fading-in and out on state transitions.
 
   constructor(
     private route: ActivatedRoute,
     private router: Router
   ) {}
 
-  ngOnInit() {}
+  ngOnInit() {
+    this.fadeContainer = document.getElementById('fade-container');
+  }
+
+  public createUSB() {
+    // Set up our fade out transition.
+    this.fadeContainer.className = 'hidden';
+
+    // Route to the next form in our sequence.
+    setTimeout(() => {
+      this.router.navigate(['/create']).then();
+    }, 300);
+  }
 
 }
