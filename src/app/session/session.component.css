@@ -1,0 +1,52 @@
+#background {
+  background: #1193d4;
+  height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+  -webkit-app-region: drag;
+}
+h1 {
+  margin: 0;
+  font-weight: 300;
+  color: white;
+  font-size: 4.7vw;
+}
+h1 b {
+  font-weight: 900;
+}
+#wave {
+  position: absolute;
+  bottom: 0;
+  width: 100%;
+  height: auto;
+}
+
+textarea:focus, input:focus{
+  outline: none;
+}
+
+input[type="text"] {
+  border: none;
+  padding: 10px;
+  font-size: 20px;
+  width: 400px;
+  margin-top: 10px;
+}
+
+button {
+  border: 1px solid white;
+  background-color: transparent;
+  color: white;
+  border-radius: 10px;
+  font-size: 20px;
+  padding: 5px 20px;
+  margin-top: 10px;
+  transition: all;
+  transition-duration: .2s;
+}
+button:hover {
+  background-color: rgba(255,255,255,0.2);
+  cursor: pointer;
+}

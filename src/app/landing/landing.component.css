@@ -1,0 +1,67 @@
+#background {
+  background: #1193d4;
+  height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  -webkit-app-region: drag;
+}
+h1 {
+  margin: 0;
+  font-weight: 300;
+  color: white;
+  font-size: 4.7vw;
+}
+h1 b {
+  font-weight: 900;
+}
+#wave {
+  position: absolute;
+  bottom: 0;
+  width: 100%;
+  height: auto;
+  animation: .5s ease-out 0s 1 slideInFromBottom;
+  pointer-events: none;
+}
+
+#logo {
+  font-size: 100px;
+  color: white;
+  padding: 100px;
+  background: url(assets/svgs/atom-white.svg);
+  background-size: 200%;
+  background-position: 42% 12%;
+  position: relative;
+  top: -50px;
+}
+#landing {
+  width: 60vw;
+  position: relative;
+  top: -50px;
+  z-index: 2;
+}
+#landing button {
+  border: 1px solid white;
+  background-color: transparent;
+  color: white;
+  border-radius: 10px;
+  font-size: 20px;
+  padding: 5px 20px;
+  margin-top: 10px;
+  margin-right: 20px;
+  transition: all;
+  transition-duration: .2s;
+}
+#landing button:hover {
+  background-color: rgba(255,255,255,0.2);
+  cursor: pointer;
+}
+
+@keyframes slideInFromBottom {
+  0% {
+    bottom: -100vh;
+  }
+  100% {
+    bottom: 0;
+  }
+}

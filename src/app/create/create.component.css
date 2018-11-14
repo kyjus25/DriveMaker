@@ -1,0 +1,44 @@
+header {
+  background: #1193d4;
+}
+header #logo {
+  font-size: 20px;
+  color: white;
+  padding: 20px;
+  background: url(assets/svgs/atom-white.svg);
+  background-size: 200%;
+  background-position: 42% 12%;
+  -webkit-app-region: drag;
+  cursor: all-scroll;
+}
+header p {
+  color: white;
+  display: inline-block;
+}
+
+header p span {
+  background-color: white;
+  padding: 5px 10px;
+  color: darkorange;
+  border-radius: 5px;
+}
+
+header button {
+  display: inline-block;
+  float: right;
+  border: 1px solid white;
+  background-color: transparent;
+  color: white;
+  border-radius: 10px;
+  font-size: 20px;
+  padding: 5px 20px;
+  margin-top: 10px;
+  margin-right: 40px;
+  transition: all;
+  transition-duration: .2s;
+}
+header button:hover {
+  background-color: rgba(255,255,255,0.2);
+  cursor: pointer;
+}
+
