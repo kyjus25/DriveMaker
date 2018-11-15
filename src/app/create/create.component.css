@@ -4,7 +4,6 @@
   display: flex;
   align-items: center;
   justify-content: center;
-  -webkit-app-region: drag;
 }
 h1 {
   margin: 0;
@@ -50,4 +49,3 @@ h1 b {
   background-color: rgba(255,255,255,0.2);
   cursor: pointer;
 }
-

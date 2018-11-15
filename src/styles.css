@@ -8,6 +8,14 @@ body {
   font-family: 'Montserrat', sans-serif;
   overflow: hidden;
 }
+#drag-region {
+  -webkit-app-region: drag;
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: calc(100% - 30px);
+  height: 20px;
+}
 
 #close {
   position: fixed;
@@ -45,4 +53,3 @@ canvas {
   top: 0;
   left: 0;
 }
-
