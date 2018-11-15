@@ -23,36 +23,61 @@ expressApp.get('/devices', function (req, res) {
         let ids = stdout_ids;
         child_process.exec('df -Hl | awk \'{print $2}\'', function(error_size, stdout_size, stderr_size){
             let size = stdout_size;
-            child_process.exec('df -Hl | awk \'{print $9}\'', function(error_mount1, stdout_mount1, stderr_mount1){
-                let mount1 = stdout_mount1;
-                child_process.exec('df -Hl | awk \'{print $10}\'', function(error_mount2, stdout_mount2, stderr_mount2){
-                    let mount2 = stdout_mount2;
+            child_process.exec('df -Hl | awk \'{print $6}\'', function(error_mountlin1, stdout_mountlin1, stderr_mountlin1){
+                let mountlin1 = stdout_mountlin1;
+                child_process.exec('df -Hl | awk \'{print $7}\'', function(error_mountlin2, stdout_mountlin2, stderr_mountlin2){
+                    let mountlin2 = stdout_mountlin2;
+                    child_process.exec('df -Hl | awk \'{print $9}\'', function(error_mountmac1, stdout_mountmac1, stderr_mountmac1){
+                        let mountmac1 = stdout_mountmac1;
+                        child_process.exec('df -Hl | awk \'{print $10}\'', function(error_mountmac2, stdout_mountmac2, stderr_mountmac2){
+                            let mountmac2 = stdout_mountmac2;
 
-                    // Split the variables into arrays
-                    ids = ids.split("\n");
-                    size = size.split("\n");
-                    mount1 = mount1.split("\n");
-                    mount2 = mount2.split("\n");
+                            // Split the variables into arrays
+                            ids = ids.split("\n");
+                            size = size.split("\n");
 
-                    // Remove the headings from the arrays
-                    ids = ids.slice(1);
-                    size = size.slice(1);
-                    mount1 = mount1.slice(1);
-                    mount2 = mount2.slice(1);
+                            mountlin1 = mountlin1.split("\n");
+                            mountlin2 = mountlin2.split("\n");
+                            mountmac1 = mountmac1.split("\n");
+                            mountmac2 = mountmac2.split("\n");
 
-                    let send = [];
-                    for (i = 0; i < ids.length - 1; i++) {
-                        let device = {};
-                        device.id = ids[i];
-                        device.size = size[i];
-                        if (mount2[i] !== '') {
-                            device.mount = mount1[i] + ' ' + mount2[i];
-                        } else {
-                            device.mount = mount1[i];
-                        }
-                        send.push(device);
-                    }
-                    res.send(send);
+                            // Remove the headings from the arrays
+                            ids = ids.slice(1);
+                            size = size.slice(1);
+                            mountlin1 = mountlin1.slice(1);
+                            mountlin2 = mountlin2.slice(1);
+                            mountmac1 = mountmac1.slice(1);
+                            mountmac2 = mountmac2.slice(1);
+
+                            let send = [];
+                            for (i = 0; i < ids.length - 1; i++) {
+                                let device = {};
+                                device.id = ids[i];
+                                device.size = size[i];
+
+
+                                if (mountmac1[i] !== '') {
+                                    // we are on a Mac
+                                    if (mountmac2[i] !== '') {
+                                        device.mount = mountmac1[i] + ' ' + mountmac2[i];
+                                    } else {
+                                        device.mount = mountmac1[i];
+                                    }
+                                } else {
+                                  // we are on linux
+                                  if (mountlin2[i] !== '') {
+                                      device.mount = mountlin1[i] + ' ' + mountlin2[i];
+                                  } else {
+                                      device.mount = mountlin1[i];
+                                  }
+                                }
+
+
+                                send.push(device);
+                            }
+                            res.send(send);
+                        });
+                    });
                 });
             });
         });
