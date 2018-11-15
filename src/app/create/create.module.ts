@@ -6,6 +6,7 @@ import {AutoCompleteModule} from 'primeng/autocomplete';
 import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
 
 import { CreateComponent } from './create.component';
+import {DropdownModule, FileUploadModule} from 'primeng/primeng';
 
 @NgModule({
   declarations: [
@@ -15,6 +16,8 @@ import { CreateComponent } from './create.component';
     AutoCompleteModule,
     BrowserModule,
     FormsModule,
+    DropdownModule,
+    FileUploadModule,
     BrowserAnimationsModule,
   ],
   providers: [

@@ -3,7 +3,17 @@
   <div id="fade-container">
     <div id="create">
       <p>You have reached the page</p>
-      <p-dropdown [options]="deviceNames" [(ngModel)]="selectedDevice"></p-dropdown>
+      <div class='ui-g'>
+        <div class="ui-g-4">
+          <p-dropdown [options]="deviceNames" [(ngModel)]="selectedDevice"></p-dropdown>
+        </div>
+        <div class="ui-g-4">
+          <p-fileUpload mode="basic" name="myfile[]" [auto]="true" customUpload="true" (uploadHandler)="file($event)"></p-fileUpload>
+        </div>
+        <div class="ui-g-4">
+          <p-button label="Click" (onClick)="createUSB()"></p-button>
+        </div>
+      </div>
     </div>
   </div>
 

@@ -18,6 +18,7 @@ import {CreateComponent} from './create/create.component';
 import {LandingComponent} from './landing/landing.component';
 import {HttpClientModule} from '@angular/common/http';
 import {DropdownModule} from 'primeng/dropdown';
+import {FileUploadModule} from 'primeng/primeng';
 
 @NgModule({
   declarations: [
@@ -35,6 +36,7 @@ import {DropdownModule} from 'primeng/dropdown';
     CardModule,
     FormsModule,
     HttpClientModule,
+    FileUploadModule,
     BrowserAnimationsModule,
   ],
   providers: [

@@ -21,7 +21,9 @@ export class CreateComponent implements OnInit, OnDestroy, AfterViewInit {
   public fadeContainer: Element = null;    // Local reference to div for fading-in and out on state transitions.
   private script = null;
   private devices = {};
-  public deviceNames = [{label:'Select Device', value:null}];
+  public deviceNames = [{label: 'Select Device', value: null}];
+  public selectedDevice;
+  private selectedDistro;
 
 
   constructor(
@@ -30,15 +32,12 @@ export class CreateComponent implements OnInit, OnDestroy, AfterViewInit {
     private http: HttpClient
   ) {
     this.http.get<Device[]>('http:/localhost:5000/devices').subscribe(devices => {
-      console.log(devices.length);
-
       devices.forEach(device => {
-        let temp = {label: null, value: null};
-        temp.label = device.id;
+        const temp = {label: null, value: null};
+        temp.label = device.mount;
         temp.value = device.id;
         this.deviceNames.push(temp);
       });
-      console.log(this.deviceNames)
     });
 
   }
@@ -50,6 +49,15 @@ export class CreateComponent implements OnInit, OnDestroy, AfterViewInit {
   public ngAfterViewInit() {
     // Fade our package selection information in.
     this.fadeContainer.className = 'visible';
+  }
+
+  public file(event) {
+    this.selectedDistro = event.files[0];
+  }
+
+  public createUSB() {
+    console.log('Device', this.selectedDevice);
+    console.log('Distro', this.selectedDistro);
   }
 
   ngOnDestroy() {
