@@ -27,13 +27,12 @@ h1 b {
   color: rgba(255,255,255,0.1);
   position: absolute;
 }
-#landing {
+#create {
   width: 70vw;
   position: relative;
-  top: -50px;
   z-index: 2;
 }
-#landing button {
+#create button {
   border: 1px solid white;
   background-color: transparent;
   color: white;
@@ -45,7 +44,7 @@ h1 b {
   transition: all;
   transition-duration: .2s;
 }
-#landing button:hover {
+#create button:hover {
   background-color: rgba(255,255,255,0.2);
   cursor: pointer;
 }

@@ -1,7 +1,10 @@
 <div id="background">
   <i id="logo" class="fab fa-usb"></i>
   <div id="fade-container">
-    <p>You have reached the page</p>
+    <div id="create">
+      <p>You have reached the page</p>
+      <p-dropdown [options]="devices" [(ngModel)]="selectedCity1"></p-dropdown>
+    </div>
   </div>
 
   <img id="wave" src="assets/pngs/wave.png">

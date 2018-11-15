@@ -8,6 +8,8 @@ import {ActivatedRoute, Router} from '@angular/router';
 import {Process} from 'process';
 import {HttpClient} from '@angular/common/http';
 
+import {SelectItem} from 'primeng/api';
+
 @Component({
   selector: 'app-canvas',
   templateUrl: './create.component.html',
@@ -18,7 +20,8 @@ export class CreateComponent implements OnInit, OnDestroy, AfterViewInit {
   public sessionId = null;
   public fadeContainer: Element = null;    // Local reference to div for fading-in and out on state transitions.
   private script = null;
-  private devices = [];
+  private devices = {};
+
 
   constructor(
     private route: ActivatedRoute,
@@ -27,7 +30,7 @@ export class CreateComponent implements OnInit, OnDestroy, AfterViewInit {
   ) {
     this.http.get('http:/localhost:5000/devices').subscribe(res => {
       console.log(res);
-    })
+    });
   }
 
   ngOnInit() {

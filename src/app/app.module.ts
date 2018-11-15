@@ -17,6 +17,7 @@ import {RouterModule} from '@angular/router';
 import {CreateComponent} from './create/create.component';
 import {LandingComponent} from './landing/landing.component';
 import {HttpClientModule} from '@angular/common/http';
+import {DropdownModule} from 'primeng/dropdown';
 
 @NgModule({
   declarations: [
@@ -28,6 +29,7 @@ import {HttpClientModule} from '@angular/common/http';
     RouterModule.forRoot(appRoutes, { useHash: true }),
     MenuModule,
     ChartModule,
+    DropdownModule,
     AutoCompleteModule,
     BrowserModule,
     CardModule,
