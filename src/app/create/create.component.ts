@@ -79,7 +79,7 @@ export class CreateComponent implements OnInit, OnDestroy, AfterViewInit {
     console.log('Distro', this.selectedDistro);
     this.http.get<Devices>('http:/localhost:5000/create' +
       '?device=' + this.selectedDevice.id +
-      '&distro=' + this.selectedDistro
+      '&distro=' + this.selectedDistro.path
     ).subscribe(res => {
       console.log(res);
     });

@@ -28,9 +28,18 @@ expressApp.get('/devices', function (req, res) {
 
 expressApp.get('/create', function (req, res) {
     const child_process = require('child_process');
+    // Unmount the disk
     child_process.exec('diskutil unmountDisk /dev/' + req.query.device, function(error_unmount, stdout_unmount, stderr_unmount){
         if (stdout_unmount != null) {
             console.log(stdout_unmount);
+            // Format the disk
+            child_process.exec('diskutil partitionDisk /dev/' + req.query.device +
+            ' GPT \'MS-DOS FAT16\' \'OS\' 750mb ' +
+            '\'MS-DOS FAT32\' \'CASPER-RW\' 0', function(error_partition, stdout_partition, stderr_partition){
+                if (stdout_partition != null) {
+                    console.log(stdout_partition);
+                }
+            });
         }
         res.send(stdout_unmount);
     });
