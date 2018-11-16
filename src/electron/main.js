@@ -26,13 +26,14 @@ expressApp.get('/devices', function (req, res) {
 
 });
 
-expressApp.post('/create', function (req, res) {
+expressApp.get('/create', function (req, res) {
     const child_process = require('child_process');
-    res.send(JSON.stringify(req.query.hello));
-    // child_process.exec('diskutil list -plist', function(error_plist, stdout_plist, stderr_plist){
-    //     const send = plist_method.parse(stdout_plist);
-    //     res.send(send);
-    // });
+    child_process.exec('diskutil unmountDisk /dev/' + req.query.device, function(error_unmount, stdout_unmount, stderr_unmount){
+        if (stdout_unmount != null) {
+            console.log(stdout_unmount);
+        }
+        res.send(stdout_unmount);
+    });
 });
 
 var port = process.env.PORT || 5000

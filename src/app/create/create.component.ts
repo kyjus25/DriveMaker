@@ -77,12 +77,10 @@ export class CreateComponent implements OnInit, OnDestroy, AfterViewInit {
   public createUSB() {
     console.log('Device', this.selectedDevice);
     console.log('Distro', this.selectedDistro);
-
-    const headers = {
-      device: this.selectedDevice,
-      distro: this.selectedDistro
-    };
-    this.http.post<Devices>('http:/localhost:5000/create', headers).subscribe(res => {
+    this.http.get<Devices>('http:/localhost:5000/create' +
+      '?device=' + this.selectedDevice.id +
+      '&distro=' + this.selectedDistro
+    ).subscribe(res => {
       console.log(res);
     });
   }
