@@ -1,5 +1,5 @@
 #background {
-  background: forestgreen;
+  background: rgba(0,0,0,0.8);
   height: 100vh;
   display: flex;
   align-items: center;
@@ -21,16 +21,28 @@ h1 b {
   height: auto;
   pointer-events: none;
 }
-
+i {
+  width: 100%;
+  padding: 40px;
+  font-size: 40px;
+  color: white;
+}
 #logo {
   font-size: 600px;
-  color: rgba(255,255,255,0.1);
+  color: rgba(255,255,255,0.03);
   position: absolute;
 }
+p-fileUpload .pi {
+  display: none;
+}
 #create {
-  width: 70vw;
+  width: 90vw;
   position: relative;
   z-index: 2;
+  top: -60px;
+}
+.ui-g-4 {
+  text-align: center;
 }
 #create button {
   border: 1px solid white;

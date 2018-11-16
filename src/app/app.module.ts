@@ -18,7 +18,8 @@ import {CreateComponent} from './create/create.component';
 import {LandingComponent} from './landing/landing.component';
 import {HttpClientModule} from '@angular/common/http';
 import {DropdownModule} from 'primeng/dropdown';
-import {FileUploadModule} from 'primeng/primeng';
+import {DialogModule, FileUploadModule} from 'primeng/primeng';
+import {TableModule} from 'primeng/table';
 
 @NgModule({
   declarations: [
@@ -35,6 +36,8 @@ import {FileUploadModule} from 'primeng/primeng';
     BrowserModule,
     CardModule,
     FormsModule,
+    DialogModule,
+    TableModule,
     HttpClientModule,
     FileUploadModule,
     BrowserAnimationsModule,

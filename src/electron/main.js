@@ -107,12 +107,12 @@ function createWindow () {
   mainWindow = new BrowserWindow(
     {
       width: 800,
-      height: 500,
+      height: 400,
       frame: false,
       minWidth: 800,
       maxWidth: 800,
-      minHeight: 500,
-      maxHeight: 500,
+      minHeight: 400,
+      maxHeight: 400,
       icon: path.join(__dirname, 'assets/pngs/icon.png')
     })
 

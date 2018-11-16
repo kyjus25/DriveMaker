@@ -2,16 +2,18 @@
   <i id="logo" class="fab fa-usb"></i>
   <div id="fade-container">
     <div id="create">
-      <p>You have reached the page</p>
       <div class='ui-g'>
         <div class="ui-g-4">
-          <p-dropdown [options]="deviceNames" [(ngModel)]="selectedDevice"></p-dropdown>
+          <i class="fas fa-hdd"></i>
+          <p-fileUpload chooseLabel="Select image" mode="basic" name="myfile[]" [auto]="true" customUpload="true" (uploadHandler)="file($event)"></p-fileUpload>
         </div>
         <div class="ui-g-4">
-          <p-fileUpload mode="basic" name="myfile[]" [auto]="true" customUpload="true" (uploadHandler)="file($event)"></p-fileUpload>
+          <i class="fas fa-plus-square"></i>
+          <p-button label="Select device" (onClick)="selectDeviceModal()"></p-button>
         </div>
         <div class="ui-g-4">
-          <p-button label="Click" (onClick)="createUSB()"></p-button>
+          <i class="fas fa-bolt"></i>
+          <p-button label="Flash!" (onClick)="createUSB()"></p-button>
         </div>
       </div>
     </div>
@@ -19,3 +21,22 @@
 
   <img id="wave" src="assets/pngs/wave.png">
 </div>
+
+<p-dialog header="Title" [(visible)]="displayModal">
+  <p-table [columns]="modalCols" [value]="deviceNames" selectionMode="single" [(selection)]="selectedDevice" dataKey="label">
+    <ng-template pTemplate="header" let-columns>
+      <tr>
+        <th *ngFor="let col of columns">
+          {{col.header}}
+        </th>
+      </tr>
+    </ng-template>
+    <ng-template pTemplate="body" let-rowData let-columns="columns">
+      <tr [pSelectableRow]="rowData">
+        <td *ngFor="let col of columns">
+          {{rowData[col.field]}}
+        </td>
+      </tr>
+    </ng-template>
+  </p-table>
+</p-dialog>

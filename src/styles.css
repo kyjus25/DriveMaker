@@ -16,7 +16,9 @@ body {
   width: calc(100% - 30px);
   height: 20px;
 }
-
+p-dialog > div {
+  max-width: 50vw;
+}
 #close {
   position: fixed;
   right: 0;
