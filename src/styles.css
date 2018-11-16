@@ -7,6 +7,7 @@ body {
   height: 100vh;
   font-family: 'Montserrat', sans-serif;
   overflow: hidden;
+  color: white;
 }
 #drag-region {
   -webkit-app-region: drag;
@@ -18,6 +19,14 @@ body {
 }
 p-dialog > div {
   max-width: 50vw;
+}
+p-fileupload .pi {
+  display: none;
+}
+#create .ui-button-text.ui-clickable {
+  padding: 10px 40px;
+  opacity: 0.8;
+
 }
 #close {
   position: fixed;
@@ -34,6 +43,15 @@ p-dialog > div {
 }
 #close:hover {
   background-color: red;
+}
+
+.deactivated, .deactivated i {
+   pointer-events: none;
+   color: grey !important;
+}
+.deactivated-line:after {
+  pointer-events: none;
+  background-color: grey !important;
 }
 
 .hidden {

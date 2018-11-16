@@ -1,4 +1,4 @@
-export interface DevicePlist {
+export interface Devices {
     AllDisks: any;
     AllDisksAndPartitions: any;
     VolumesFromDisks: any;

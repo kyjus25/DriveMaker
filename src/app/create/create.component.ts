@@ -6,8 +6,7 @@ import {BehaviorSubject} from 'rxjs/BehaviorSubject';
 import {ReplaySubject} from 'rxjs/ReplaySubject';
 import {ActivatedRoute, Router} from '@angular/router';
 import {HttpClient} from '@angular/common/http';
-import {Device} from '../types/device.type';
-import {DevicePlist} from '../types/device-plist.type';
+import {Devices} from '../types/devices.type';
 
 import {SelectItem} from 'primeng/api';
 
@@ -26,7 +25,7 @@ export class CreateComponent implements OnInit, OnDestroy, AfterViewInit {
   public modalCols = [];
   public deviceNames = [];
   public selectedDevice;
-  private selectedDistro;
+  public selectedDistro;
 
 
   constructor(
@@ -40,25 +39,15 @@ export class CreateComponent implements OnInit, OnDestroy, AfterViewInit {
       { field: 'name', header: 'Name' },
       { field: 'size', header: 'Size' }
     ];
-    this.http.get<DevicePlist>('http:/localhost:5000/devices_plist').subscribe(devices => {
-      console.log(devices.WholeDisks.length);
+    this.http.get<Devices>('http:/localhost:5000/devices').subscribe(devices => {
       for (let i = 0; i < devices.WholeDisks.length; i++) {
         const temp = {id: null, name: null, size: null};
         temp.id = devices.WholeDisks[i];
         temp.name = devices.VolumesFromDisks[i];
-        temp.size = devices.AllDisksAndPartitions[i].Size;
+        temp.size = Math.floor(devices.AllDisksAndPartitions[i].Size / 1000000000) + 'GB';
         this.deviceNames.push(temp);
       }
     });
-
-    // this.http.get<Device[]>('http:/localhost:5000/devices').subscribe(devices => {
-    //   devices.forEach(device => {
-    //     const temp = {label: null, value: null};
-    //     temp.label = device.mount;
-    //     temp.value = device.id;
-    //     this.deviceNames.push(temp);
-    //   });
-    // });
 
   }
 
@@ -72,7 +61,13 @@ export class CreateComponent implements OnInit, OnDestroy, AfterViewInit {
   }
 
   public file(event) {
-    this.selectedDistro = event.files[0];
+    console.log(event.files[0].name);
+    if (event.files[0].name.endsWith('.iso')) {
+      this.selectedDistro = event.files[0];
+      if (event.files[0].name.length >= 20) {
+        this.selectedDistro.name = this.selectedDistro.name.substring(0, 8) + '...' + this.selectedDistro.name.substring(-0, -8)
+      }
+    }
   }
 
   public selectDeviceModal() {
@@ -82,6 +77,14 @@ export class CreateComponent implements OnInit, OnDestroy, AfterViewInit {
   public createUSB() {
     console.log('Device', this.selectedDevice);
     console.log('Distro', this.selectedDistro);
+
+    const headers = {
+      device: this.selectedDevice,
+      distro: this.selectedDistro
+    };
+    this.http.post<Devices>('http:/localhost:5000/create', headers).subscribe(res => {
+      console.log(res);
+    });
   }
 
   ngOnDestroy() {

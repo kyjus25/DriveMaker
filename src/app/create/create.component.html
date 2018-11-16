@@ -4,15 +4,42 @@
     <div id="create">
       <div class='ui-g'>
         <div class="ui-g-4">
-          <i class="fas fa-hdd"></i>
-          <p-fileUpload chooseLabel="Select image" mode="basic" name="myfile[]" [auto]="true" customUpload="true" (uploadHandler)="file($event)"></p-fileUpload>
+
+          <i *ngIf="selectedDevice" class="fas fa-hdd hasBar"></i>
+          <i *ngIf="!selectedDevice" class="fas fa-hdd hasBar deactivated-line"></i>
+
+          <div *ngIf="selectedDistro">
+            {{selectedDistro.name}}
+          </div>
+          <div *ngIf="!selectedDistro">
+            <p-fileUpload
+              chooseLabel="Select image"
+              mode="basic"
+              name="myfile[]"
+              [auto]="true"
+              customUpload="true"
+              (uploadHandler)="file($event)">
+            </p-fileUpload>
+            <span>only supports .iso</span>
+          </div>
         </div>
         <div class="ui-g-4">
-          <i class="fas fa-plus-square"></i>
-          <p-button label="Select device" (onClick)="selectDeviceModal()"></p-button>
+
+
+          <i *ngIf="selectedDistro" class="fas fa-plus-square hasBar"></i>
+          <i *ngIf="!selectedDistro" class="fas fa-plus-square hasBar deactivated deactivated-line"></i>
+
+          <div *ngIf="selectedDevice">
+            {{selectedDevice.name}}
+          </div>
+          <div *ngIf="!selectedDevice">
+            <p-button label="Select device" (onClick)="selectDeviceModal()"></p-button>
+          </div>
         </div>
         <div class="ui-g-4">
-          <i class="fas fa-bolt"></i>
+          <i *ngIf="selectedDistro && selectedDevice" class="fas fa-bolt"></i>
+          <i *ngIf="!selectedDistro || !selectedDevice" class="fas fa-bolt deactivated"></i>
+
           <p-button label="Flash!" (onClick)="createUSB()"></p-button>
         </div>
       </div>
@@ -22,8 +49,8 @@
   <img id="wave" src="assets/pngs/wave.png">
 </div>
 
-<p-dialog header="Title" [(visible)]="displayModal">
-  <p-table [columns]="modalCols" [value]="deviceNames" selectionMode="single" [(selection)]="selectedDevice" dataKey="label">
+<p-dialog header="Select Device" [(visible)]="displayModal">
+  <p-table [columns]="modalCols" [value]="deviceNames" selectionMode="single" [(selection)]="selectedDevice" dataKey="id">
     <ng-template pTemplate="header" let-columns>
       <tr>
         <th *ngFor="let col of columns">

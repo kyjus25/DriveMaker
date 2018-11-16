@@ -14,6 +14,11 @@ h1 {
 h1 b {
   font-weight: 900;
 }
+span {
+  display: block;
+  font-size: 12px;
+  margin-top: 10px;
+}
 #wave {
   position: absolute;
   bottom: 0;
@@ -26,15 +31,23 @@ i {
   padding: 40px;
   font-size: 40px;
   color: white;
+  position: relative;
+}
+i.hasBar:after {
+  position: absolute;
+  content: '';
+  top: 15vh;
+  right: -11vw;
+  width: 20vw;
+  background-color: white;
+  height: 1px;
 }
 #logo {
   font-size: 600px;
   color: rgba(255,255,255,0.03);
   position: absolute;
 }
-p-fileUpload .pi {
-  display: none;
-}
+
 #create {
   width: 90vw;
   position: relative;
