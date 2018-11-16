@@ -84,6 +84,16 @@ expressApp.get('/devices', function (req, res) {
     });
 });
 
+expressApp.get('/devices_plist', function (req, res) {
+    const child_process = require('child_process');
+    const plist_method = require('plist');
+    child_process.exec('diskutil list -plist', function(error_plist, stdout_plist, stderr_plist){
+        const send = plist_method.parse(stdout_plist);
+        res.send(send);
+    });
+
+});
+
 var port = process.env.PORT || 5000
 expressApp.listen(port, () => console.log('Listening at http://localhost:5000'))
 

@@ -41,6 +41,7 @@
     "electron-winstaller": "^2.5.2",
     "express": "~4.16.4",
     "node-cmd": "~3.0.0",
+    "plist": "~3.0.1",
     "primeicons": "~1.0.0-beta.10",
     "primeng": "~6.1.4",
     "pusher": "~2.1.3",
